@@ -11,7 +11,8 @@ import os
 #from css_json_json import *
 #from rust_toml_json import *
 #from julia_toml_json import * 
-from haskell_cabal_json import *
+#from haskell_cabal_json import *
+from ruby_gemspec_json import *
 
 
 for f in os.listdir(r"."):
@@ -56,7 +57,8 @@ for f in os.listdir(r"."):
         
     
     if (f.endswith('.gemspec')):
-        print('11')        
+        print('11')       
+        ruby_gemspec_json.liderDelTrabajo(f)
         
 
       

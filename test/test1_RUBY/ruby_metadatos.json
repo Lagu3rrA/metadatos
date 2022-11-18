@@ -1,0 +1,17 @@
+{
+    "name": "'gitmodel'",
+    "version": "'0.0.8'",
+    "repository": "'http://github.com/pauldowman/gitmodel'", 
+    "description": "<<-DESC.strip.gsub(/\\n\\s+/,)GitModel persists Ruby objects using Git as a data storage engine. It's anActiveModel implementation so it works stand-alone or in Rails 3 as a drop-inreplacement for ActiveRecord or DataMapper.Because the database is a Gitrepository it can be synced across multiple machines, manipulated with standardGit client tools, can be branched and merged, and of course keeps the historyof all changes.", 
+    "dependencies": 
+        [
+            " activemodel ~> 3.0.1", 
+            " activesupport ~> 3.0.1", 
+            " dalli", " grit >= 2.3.0", 
+            " lockfile >= 1.4.3", " rake", 
+            " yajl-ruby >= 0.8.2", 
+            " ZenTest >= 4.4.0", 
+            " autotest >= 4.4.1", 
+            " rspec >= 2.0.1"
+        ]
+}
