@@ -1,0 +1,23 @@
+{
+    "name": "DataSpyre",
+    "version": "0.2.8", 
+    "authors": 
+        [
+            {
+                "name": "Adam Hajari", 
+                "email": "adam@nextbigsound.com"
+            }
+        ], 
+    "repository": "https://github.com/adamhajari/spyre", 
+    "license": "MIT", 
+    "description": "(Spyre makes it easy to build interactive web applications,and requires no knowledge of HTML, CSS, or Javascript.),", 
+    "dependencies": 
+        [
+            "six>=1.11.0",
+            "numpy", 
+            "pandas", 
+            "cherrypy", 
+            "jinja2", 
+            "matplotlib"
+        ]
+}

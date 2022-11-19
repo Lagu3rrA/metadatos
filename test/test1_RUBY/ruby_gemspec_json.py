@@ -183,7 +183,7 @@ class ruby_gemspec_json:
         
         gemspec = ruby_gemspec_json.cargar_el_gemspec(rutaArchivo)
             
-        a = ruby_gemspec_json.darle_formato(gemspec)
+        #a = ruby_gemspec_json.darle_formato(gemspec)
             
         ruby_gemspec_json.rellenar_el_diccionario(a)
         

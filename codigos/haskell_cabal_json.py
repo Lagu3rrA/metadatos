@@ -100,6 +100,8 @@ class haskell_cabal_json:
                 
             if 'synopsis' in keyValue:
                 datos['description'] =  keyValue['synopsis']
+                
+            if 'add_depp'
             
 
         
