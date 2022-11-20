@@ -1,0 +1,34 @@
+{
+    "name": "nombre_de_ejemplo",
+    "title":  "NOMBRE_DEL_PROYECTO"
+    "homepage": "https://www.nombre_de_ejemplo.com", 
+    "url": "https://github.com/NOMBRE_DEL_PROYECTO/nombre_de_ejemplo.git", 
+    "version": "0.0.0", 
+    "authors": 
+        [
+            {
+                "name": "Autor_de_ejemplo_01", 
+                "email": "autor_de_ejemplo_01@ejemplo.com"
+            },
+            {
+                "name": "Autor_de_ejemplo_02", 
+                "email": "autor_de_ejemplo_02@ejemplo.com"
+            }
+        ], 
+    "dependecies":
+        {
+            "dependecia_1": "7.2.3", 
+            "dependecia_2": "7.2.2", 
+            "dependecia_3": "3.0.0",
+        }
+    "keywords": 
+        [
+            "palabra_importante_1", 
+            "palabra_importante_2",
+            "palabra_importante_3",
+
+        ], 
+    "license": "licencia_de_ejemplo", 
+    "description": "descripcion_de_ejemplo_del_proyecto", 
+
+}
