@@ -14,7 +14,6 @@ Dentro de archivos devuelto podemos encontrar un ejemplo de como se devuelven lo
 
 En cuanto al codigo: 
 
-- Python falta el cfg
 
 - De php y de java hay que ver que devuelva bien los autores con el formato que queremos 
 
