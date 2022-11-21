@@ -16,8 +16,5 @@ En cuanto al codigo:
 
 - Python falta el cfg
 
-- De CSS esta hecho el package pero no el bower, porque tengo que pensar como usar dos documentos
-  y crear uno 
-
 - De php y de java hay que ver que devuelva bien los autores con el formato que queremos 
 
