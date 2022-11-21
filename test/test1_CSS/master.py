@@ -15,11 +15,13 @@ from css_json_json import *
 #from ruby_gemspec_json import *
 #from python_py_json import *
 #from javascript_json_json import *
+from python_cfg_json import *
 
 for f in os.listdir(r"."):
     
     if (f == 'setup.cfg'): 
         print('1')
+        python_cfg_json.liderDelTrabajo()
         
     if (f == 'setup.py'):
         print('2')
