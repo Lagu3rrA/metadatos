@@ -9,11 +9,3 @@ Te devolvera en el mismo directorio un archivo  JSON con los metadatos
 Dentro de archivos devuelto podemos encontrar un ejemplo de como se devuelven los datos
 
 
-
------------------------------------------------
-
-En cuanto al codigo: 
-
-
-- De php y de java hay que ver que devuelva bien los autores con el formato que queremos 
-
