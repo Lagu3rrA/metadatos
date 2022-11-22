@@ -53,15 +53,15 @@ class haskell_cabal_json:
             keyValueNombre = haskell_cabal_json.dejarBonito(palabra)
                
             
-            if 'name' in keyValueNombre and not salir:
-                autorUnido['name'] = keyValueNombre['name']
-                
+            if 'author' in keyValueNombre and not salir:
+                autorUnido['name'] = keyValueNombre['author'].replace("  ","")
+                print(keyValueNombre['author'].replace("  ",""))
                 for otraPalabra in cabalSeparadoSave:
                     
                     keyValueEmail = haskell_cabal_json.dejarBonito(otraPalabra)
                     
                     if 'maintainer' in keyValueEmail and not salir:
-                       autorUnido['email'] = keyValueEmail['maintainer']
+                       autorUnido['email'] = keyValueEmail['maintainer'].replace("  ","")
                        salir = True
                        
                      
@@ -84,24 +84,22 @@ class haskell_cabal_json:
             keyValue = haskell_cabal_json.dejarBonito(palabra)
             
             if 'name' in keyValue:
-                datos['name'] = keyValue['name']
+                datos['name'] = keyValue['name'].replace("  ","")
             
             if 'version' in keyValue:
-                datos['version'] = keyValue['version']
+                datos['version'] = keyValue['version'].replace("  ","")
                 
             if 'homepage' in keyValue:
-                datos['homepage'] = keyValue['homepage']
+                datos['homepage'] = keyValue['homepage'].replace("  ","")
             
             if 'license' in keyValue:
-                datos['license'] =  keyValue['license']
+                datos['license'] =  keyValue['license'].replace("  ","")
             
             if 'author' in keyValue:
                 datos['authors'] = haskell_cabal_json.casoAutores(cabalSeparadoSave)
                 
             if 'synopsis' in keyValue:
-                datos['description'] =  keyValue['synopsis']
-                
-            if 'add_depp'
+                datos['description'] =  keyValue['synopsis'].replace("  ","")
             
 
         
@@ -113,7 +111,7 @@ class haskell_cabal_json:
     def crear_el_nuevo_json():
             
         dir = r"."
-        file_name =  "R_metadatos.json"
+        file_name =  "haskell_metadatos.json"
         
         with open(os.path.join(dir, file_name), 'w') as file:
             json.dump(datos, file)
@@ -130,9 +128,7 @@ class haskell_cabal_json:
             
         haskell_cabal_json.rellenar_el_diccionario(a)
         
-        print(datos)
-        
-        #haskell_cabal_json.crear_el_nuevo_json()
+        haskell_cabal_json.crear_el_nuevo_json()
             
     
 

@@ -8,8 +8,10 @@ Created on Mon Oct 17 23:36:35 2022
 import os
 import json
 
+
 # Creo el diccionario en el que voy a meter la informacion
 datos = {}
+
  
 class php_json_json:
     
@@ -19,7 +21,18 @@ class php_json_json:
         with open(ruta) as contenido: 
             curso = json.load(contenido)
             return curso
-    
+    def  casoAutores(autores):
+        listaDeAutores = []
+        for __a__ in autores:
+            autor = {}
+            if 'name' in __a__:
+                autor['name'] = __a__['name']
+                
+            if 'email' in __a__:
+                autor['email'] = __a__['email']
+            listaDeAutores.append(autor)
+        return listaDeAutores
+        
     # Relleno el diccionario con la informacion de json que nos han dado
     def rellenar_el_diccionario(jsono):
         
@@ -39,7 +52,7 @@ class php_json_json:
             datos['version'] = jsono['version'] 
             
         if 'authors' in jsono: 
-            datos['authors'] = jsono['authors']      
+            datos['authors'] = php_json_json.casoAutores(jsono['authors'])     
         
         if 'keywords' in jsono: 
             datos['keywords'] = jsono['keywords']
@@ -53,30 +66,26 @@ class php_json_json:
     
     # Vuelco los datos del diccionario en un archivo json 
     def crear_el_nuevo_json():
+    
             
-            dir = r"D:\Universidad\Univerisdad\tfg"
+            dir = r"."
             file_name =  "php_metadatos.json"
             
             with open(os.path.join(dir, file_name), 'w') as file:
-                json.dump(datos, file)
-            
+                json.dump(datos, file) 
                 
-    # Recorremos todos los directorios que encontremos en esta ruta buscando el que empieze por el documento buscado
-    # Lo buscamos y no lo hacemos directamente por si el archivo no existe
-    for f in os.listdir(r"D:\Universidad\Univerisdad\tfg"):
-        if f.startswith("composer"):
-           
-            # Si lo hemos encontrado cargamos el json 
-            ruta = r'D:\Universidad\Univerisdad\tfg\composer.json'
-            
-            # Sacamos la informacion del json
-            jsono = cargar_el_json(ruta)
-            
-            # La guardamos en el diccionario
-            rellenar_el_diccionario(jsono)
-            
-            # Creamos el archivo que vamos a devolver
-            crear_el_nuevo_json()
+                
+    def liderDelTrabajo():#ruta
+        
+        print('php')
+        # Sacamos la informacion del json
+        jsono = php_json_json.cargar_el_json('./composer.json')
+        
+        # La guardamos en el diccionario
+        php_json_json.rellenar_el_diccionario(jsono)
+        
+        # Creamos el archivo que vamos a devolver
+        php_json_json.crear_el_nuevo_json()
         
         
 

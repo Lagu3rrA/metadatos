@@ -21,7 +21,18 @@ class php_json_json:
         with open(ruta) as contenido: 
             curso = json.load(contenido)
             return curso
-    
+    def  casoAutores(autores):
+        listaDeAutores = []
+        for __a__ in autores:
+            autor = {}
+            if 'name' in __a__:
+                autor['name'] = __a__['name']
+                
+            if 'email' in __a__:
+                autor['email'] = __a__['email']
+            listaDeAutores.append(autor)
+        return listaDeAutores
+        
     # Relleno el diccionario con la informacion de json que nos han dado
     def rellenar_el_diccionario(jsono):
         
@@ -41,7 +52,7 @@ class php_json_json:
             datos['version'] = jsono['version'] 
             
         if 'authors' in jsono: 
-            datos['authors'] = jsono['authors']      
+            datos['authors'] = php_json_json.casoAutores(jsono['authors'])     
         
         if 'keywords' in jsono: 
             datos['keywords'] = jsono['keywords']

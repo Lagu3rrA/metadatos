@@ -53,15 +53,15 @@ class haskell_cabal_json:
             keyValueNombre = haskell_cabal_json.dejarBonito(palabra)
                
             
-            if 'name' in keyValueNombre and not salir:
-                autorUnido['name'] = keyValueNombre['name']
-                
+            if 'author' in keyValueNombre and not salir:
+                autorUnido['name'] = keyValueNombre['author'].replace("  ","")
+                print(keyValueNombre['author'].replace("  ",""))
                 for otraPalabra in cabalSeparadoSave:
                     
                     keyValueEmail = haskell_cabal_json.dejarBonito(otraPalabra)
                     
                     if 'maintainer' in keyValueEmail and not salir:
-                       autorUnido['email'] = keyValueEmail['maintainer']
+                       autorUnido['email'] = keyValueEmail['maintainer'].replace("  ","")
                        salir = True
                        
                      
@@ -84,22 +84,22 @@ class haskell_cabal_json:
             keyValue = haskell_cabal_json.dejarBonito(palabra)
             
             if 'name' in keyValue:
-                datos['name'] = keyValue['name']
+                datos['name'] = keyValue['name'].replace("  ","")
             
             if 'version' in keyValue:
-                datos['version'] = keyValue['version']
+                datos['version'] = keyValue['version'].replace("  ","")
                 
             if 'homepage' in keyValue:
-                datos['homepage'] = keyValue['homepage']
+                datos['homepage'] = keyValue['homepage'].replace("  ","")
             
             if 'license' in keyValue:
-                datos['license'] =  keyValue['license']
+                datos['license'] =  keyValue['license'].replace("  ","")
             
             if 'author' in keyValue:
                 datos['authors'] = haskell_cabal_json.casoAutores(cabalSeparadoSave)
                 
             if 'synopsis' in keyValue:
-                datos['description'] =  keyValue['synopsis']
+                datos['description'] =  keyValue['synopsis'].replace("  ","")
             
 
         

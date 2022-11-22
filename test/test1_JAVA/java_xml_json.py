@@ -41,20 +41,31 @@ class java_xml_json:
             if atributos.tag.endswith('version'):
                 datos['version'] = atributos.text 
             
-            if atributos.tag.endswith('groupId'):
-                datos['groupId'] = atributos.text
                 
             if atributos.tag.endswith('developers'):
+                #Entramos dentro de los developers
+                
+                listaDeAutores = []
                 
                 for autores in atributos:
-                    if autores.tag.endswith('name'):
-                        datos['name'] = autores.text
+                    # iteramos cada uno de los desarolladores
+                    
+                    # al crearse aqui este mapa, se pondra a cero cada vez que acabe con un developer
+                    autor = {}
+                    
+                    for __a__ in autores:
+                        # para cada uno vemos si tiene los atributos de nombre y de email
+                        if __a__.tag.endswith('name'):
+                            autor['name'] = __a__.text
+                         
+                        if __a__.tag.endswith('email'):
+                            autor['email'] = __a__.text
+                    
+                    # cuando acabamos de iterar los atributos 
+                    listaDeAutores.append(autor)
                         
-                    if autores.tag.endswith('email'):
-                        datos['email'] = autores.text
-             
-          
-        
+                datos['authors'] = listaDeAutores
+                
             if atributos.tag.endswith('dependencyManagement'):
                 
                 # Creo un lisa en la que voy  a meter todas las dependecias
@@ -84,7 +95,7 @@ class java_xml_json:
                             dependecias.append(tupla)
                            
                 # una vez cnstruida la lista de dependecias la guardo en el diccionario grande de datos 
-                datos['Dependencies'] = dependecias
+                datos['dependencies'] = dependecias
               
             if atributos.tag.endswith('licenses'):
                   listaDeLicencias = []
@@ -100,7 +111,7 @@ class java_xml_json:
                           listaDeLicencias.append(tupla)
           
             if atributos.tag.endswith('description'):
-                datos['Description'] = atributos.text 
+                datos['description'] = atributos.text 
                 
     
     def crear_el_nuevo_json():

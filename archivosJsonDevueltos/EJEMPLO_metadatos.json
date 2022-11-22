@@ -1,6 +1,6 @@
 {
     "name": "nombre_de_ejemplo",
-    "title":  "NOMBRE_DEL_PROYECTO"
+    "title":  "NOMBRE_DEL_PROYECTO",
     "homepage": "https://www.nombre_de_ejemplo.com", 
     "url": "https://github.com/NOMBRE_DEL_PROYECTO/nombre_de_ejemplo.git", 
     "version": "0.0.0", 

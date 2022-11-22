@@ -69,10 +69,15 @@ class R_txt_json:
             autor = {}
             
             # Y metemos el nombre
-            autor['name'] = R_txt_json.encontrar_nombre(autorConFormato)
+            nombre = R_txt_json.encontrar_nombre(autorConFormato)
+            if nombre:
+                autor['name'] = nombre
             
             # Y el email
-            autor['email'] = R_txt_json.encontrar_email(autorConFormato)
+            email = R_txt_json.encontrar_email(autorConFormato)
+            print(email)
+            if email:
+                autor['email'] = R_txt_json.encontrar_email(autorConFormato)
             
             # Añadimos el autor a la lista
             listaAutoresDevolver.append(autor)
@@ -136,25 +141,25 @@ class R_txt_json:
             # Vamos rellenado  el diccionario con los datos 
             
             if key == 'Title':
-                datos['Name'] = value
+                datos['name'] = value
                 
             if key == 'Version':
-                datos['Version'] = value
+                datos['version'] = value
                 
             if key == 'URL':
-                datos['Homepage'] = value
+                datos['homepage'] = value
                 
             if key == 'BugReports': # usamos el de los issues pero le quitamso el directorio issues
-                datos['Repository'] = R_txt_json.casoRepositor(value)
+                datos['repository'] = R_txt_json.casoRepositor(value)
                 
             if key == 'Description': # si la descripcion esta en mas de una linea esto resuelve ese problema
-                datos['Description'] = R_txt_json.casoDescripcion(txtFormatoSave)
+                datos['description'] = R_txt_json.casoDescripcion(txtFormatoSave)
             
             if key == 'License':
-                datos['License'] = value
+                datos['license'] = value
             
             if key == 'Authors@R': # organiza el formato para que salga nombre y mail
-                datos['Authors'] = R_txt_json.casoAutores(txtFormatoSave)
+                datos['authors'] = R_txt_json.casoAutores(txtFormatoSave)
         
     def casoDescripcion(txtFormato):
         
