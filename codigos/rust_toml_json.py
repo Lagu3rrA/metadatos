@@ -22,6 +22,7 @@ class rust_toml_json:
         return curso
 
     def crearListaAutores(listaDeAutoresTOML):
+        listaDeAutores = []
         for autor in listaDeAutoresTOML:
             # aqui guardaremos el autor y su email
             unidadDeAutor = {}
@@ -35,7 +36,9 @@ class rust_toml_json:
             # guardo la segunda parte poniendo lo bonito como el email
             unidadDeAutor['email'] = autorPartido[1].replace(">", "")
             
-            return unidadDeAutor
+            listaDeAutores.append(unidadDeAutor)
+            
+        return listaDeAutores
     
     # Relleno el diccionario con la informacion de json que nos han dado
     def rellenar_el_diccionario(toml):
