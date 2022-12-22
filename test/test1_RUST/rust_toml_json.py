@@ -98,7 +98,9 @@ class rust_toml_json:
         
         with open(os.path.join(dir, file_name), 'w') as file:
             json.dump(datos, file) 
-                
+            
+        
+
                 
     def liderDelTrabajo():
         
@@ -110,7 +112,8 @@ class rust_toml_json:
         # La guardamos en el diccionario
         rust_toml_json.rellenar_el_diccionario(toml)
         
+        return datos 
         
         # Creamos el archivo que vamos a devolver
-        rust_toml_json.crear_el_nuevo_json()
+        #rust_toml_json.crear_el_nuevo_json()
             

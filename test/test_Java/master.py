@@ -1,9 +1,10 @@
 
 import os
 
+from java_xml_json import *
+"""
 from php_json_json import *
 from R_txt_json import *
-from java_xml_json import *
 from css_json_json import *
 from rust_toml_json import *
 from julia_toml_json import * 
@@ -12,10 +13,11 @@ from ruby_gemspec_json import *
 from python_py_json import *
 from javascript_json_json import *
 from python_cfg_json import *
-
+"""
 # Esta es la lista de json que vamos a devolver sui encopntramos mas de un archivo 
 # enciam vendra de que lengujes es
 listaDeJsonDevueltos = []
+    
 
 for f in os.listdir(r"."):
     
@@ -55,7 +57,7 @@ for f in os.listdir(r"."):
   
     if (f == 'bower.json'):
         datos = css_json_json.liderDelTrabajo()
-        
+        print(datos)
         if datos:
             listaDeJsonDevueltos.append('CSS_bower.json')
             listaDeJsonDevueltos.append(datos)
@@ -122,14 +124,20 @@ for f in os.listdir(r"."):
             listaDeJsonDevueltos.append('RUBY_gemspec')
             listaDeJsonDevueltos.append(datos)
         break
-        
 
+
+print(listaDeJsonDevueltos)   
+
+"""
 dir = r"."
-file_name =  "metadatos.json"
+
+print('¿Como quieres llamar al archivo de metadatos?')
+name =  input()
+file_name = name + '.json'
 
 with open(os.path.join(dir, file_name), 'w') as file:
     json.dump(listaDeJsonDevueltos, file) 
-              
+  """            
     
     
     
