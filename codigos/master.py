@@ -73,7 +73,7 @@ for f in os.listdir(r"."):
                 if datos:
                     listaDeJsonDevueltos.append('CSS_bower.json')
                     listaDeJsonDevueltos.append(datos)
-                break
+                continue
    
         # que sea solo con el package.json de Javascript 
         # usamos el de javascript por que seri gigual para este caso
@@ -82,7 +82,7 @@ for f in os.listdir(r"."):
         if datos:
             listaDeJsonDevueltos.append('JAVASCRIPT_package.json')
             listaDeJsonDevueltos.append(datos)
-        break
+        continue
     
     if (f == 'composer.json'):
         datos = php_json_json.liderDelTrabajo()
@@ -90,7 +90,7 @@ for f in os.listdir(r"."):
         if datos:
             listaDeJsonDevueltos.append('PHP_composer.json')
             listaDeJsonDevueltos.append(datos)
-        break
+        continue
     
     if (f == 'DESCRIPTION.txt'):
         datos = R_txt_json.liderDelTrabajo()
@@ -98,7 +98,7 @@ for f in os.listdir(r"."):
         if datos:
             listaDeJsonDevueltos.append('R_DESCRIPTION.txt')
             listaDeJsonDevueltos.append(datos)
-        break
+        continue
         
     if (f == 'Project.toml'):
         datos = julia_toml_json.liderDelTrabajo()
@@ -106,7 +106,7 @@ for f in os.listdir(r"."):
         if datos:
             listaDeJsonDevueltos.append('JULIA_Project.toml')
             listaDeJsonDevueltos.append(datos)
-        break
+        continue
         
     if (f.endswith('.cabal')):
         datos = haskell_cabal_json.liderDelTrabajo(f)
@@ -114,7 +114,7 @@ for f in os.listdir(r"."):
         if datos:
             listaDeJsonDevueltos.append('HASKELL_cabal')
             listaDeJsonDevueltos.append(datos)
-        break
+        continue
         
     if (f.endswith('.gemspec')):
         datos = ruby_gemspec_json.liderDelTrabajo(f)
@@ -122,7 +122,7 @@ for f in os.listdir(r"."):
         if datos:
             listaDeJsonDevueltos.append('RUBY_gemspec')
             listaDeJsonDevueltos.append(datos)
-        break
+        continue
 
 
 dir = r"."
