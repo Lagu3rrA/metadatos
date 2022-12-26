@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
+  # -*- coding: utf-8 -*-
 """
 Created on Mon Oct 17 23:36:35 2022
 
-@author: jacan
+@author: Lagu3rrA
 """
 
-import os
 import json
 
 
@@ -21,6 +20,8 @@ class php_json_json:
         with open(ruta) as contenido: 
             curso = json.load(contenido)
             return curso
+        
+        
     def  casoAutores(autores):
         listaDeAutores = []
         for __a__ in autores:
@@ -42,50 +43,44 @@ class php_json_json:
         # y si encuentra una key igual la copiamos junto al valor
         # en nuestro diccionario
         
-        if 'name' in jsono: 
+        if 'name' in jsono and jsono['name'] : 
             datos['name'] = jsono['name']
             
-        if 'homepage' in jsono: 
+        if 'homepage' in jsono and jsono['homepage']: 
             datos['homepage'] = jsono['homepage'] 
             
         if 'version' in jsono: 
             datos['version'] = jsono['version'] 
             
-        if 'authors' in jsono: 
+        if 'authors' in jsono and jsono['authors']: 
             datos['authors'] = php_json_json.casoAutores(jsono['authors'])     
         
-        if 'keywords' in jsono: 
+        if 'keywords' in jsono and jsono['keywords']: 
             datos['keywords'] = jsono['keywords']
             
-        if 'license' in jsono: 
+        if 'license' in jsono and jsono['license']: 
             datos['license'] = jsono['license']
             
-        if 'description' in jsono: 
-            datos['description'] = jsono['description']    
+        if 'description' in jsono and jsono['description']: 
+            datos['description'] = jsono['description']
+        
+        if 'require' in jsono and jsono['require']:
+            datos['dependencies'] = jsono['require']
+        
+        if 'require-dev' in jsono and jsono['require-dev']:
+            datos['dev-dependencies'] = jsono['require-dev']
             
-    
-    # Vuelco los datos del diccionario en un archivo json 
-    def crear_el_nuevo_json():
-    
             
-            dir = r"."
-            file_name =  "php_metadatos.json"
-            
-            with open(os.path.join(dir, file_name), 'w') as file:
-                json.dump(datos, file) 
-                
-                
     def liderDelTrabajo():#ruta
         
-        print('php')
         # Sacamos la informacion del json
+
         jsono = php_json_json.cargar_el_json('./composer.json')
-        
+
         # La guardamos en el diccionario
         php_json_json.rellenar_el_diccionario(jsono)
-        
-        # Creamos el archivo que vamos a devolver
-        php_json_json.crear_el_nuevo_json()
+
+        return datos
         
         
 

@@ -2,12 +2,10 @@
 """
 Created on Wed Nov 16 22:37:21 2022
 
-@author: jacan
+@author: Lagu3rrA
 """
-import os
-import toml
-import json
 
+import toml
 
 # Creo el diccionario en el que voy a meter la informacion
 datos = {}
@@ -51,13 +49,13 @@ class rust_toml_json:
         
         if 'package' in toml: 
             
-           if 'name' in toml['package']:
+           if 'name' in toml['package'] and toml['package']['name']:
                datos['name'] = toml['package']['name']
                
-           if 'version' in toml['package']: 
+           if 'version' in toml['package'] and  toml['package']['version']: 
                datos['version'] = toml['package']['version']
                
-           if 'authors' in toml['package']: 
+           if 'authors' in toml['package'] and toml['package']['authors']: 
                
                #Cojo la lista de autores del json del toml
                listaDeAutoresTOML = toml['package']['authors']
@@ -70,39 +68,31 @@ class rust_toml_json:
                
                datos['authors'] = listaDeAutoresJSON
                
-           if 'license' in toml['package']:
+           if 'license' in toml['package'] and toml['package']['license']:
                datos['license'] = toml['package']['license']
         
-           if 'keywords' in toml['package']:
+           if 'keywords' in toml['package'] and toml['package']['keywords']:
               datos['keywords'] = toml['package']['keywords']
               
-           if 'repository' in toml['package']:
-              datos['repository'] = toml['package']['repository']
+           if 'repository' in toml['package'] and toml['package']['repository']:
+              datos['url'] = toml['package']['repository']
                
-           if 'description' in toml['package']:
+           if 'description' in toml['package'] and toml['package']['description']:
               datos['description'] = toml['package']['description']
               
-           if 'documentation' in toml['package']:
+           if 'documentation' in toml['package'] and toml['package']['documentation']:
               datos['homepage'] = toml['package']['documentation']
            
-        if 'dependencies' in toml:
+        if 'dependencies' in toml and toml['dependencies']:
             datos['dependecies'] = toml['dependencies']
             
-            
-    
-    # Vuelco los datos del diccionario en un archivo json 
-    def crear_el_nuevo_json():
+        if 'dev-dependencies' in toml and toml['dev-dependencies']:
+            datos['dev-dependecies'] = toml['dev-dependencies']    
 
-        dir = r"."
-        file_name =  "rust_metadatos.json"
-        
-        with open(os.path.join(dir, file_name), 'w') as file:
-            json.dump(datos, file) 
-                
+
                 
     def liderDelTrabajo():
-        
-        print('rust')
+
         # Sacamos la informacion del json
         toml = rust_toml_json.cargar_el_toml('./Cargo.toml')
         
@@ -110,7 +100,6 @@ class rust_toml_json:
         # La guardamos en el diccionario
         rust_toml_json.rellenar_el_diccionario(toml)
         
+        return datos 
         
-        # Creamos el archivo que vamos a devolver
-        rust_toml_json.crear_el_nuevo_json()
             

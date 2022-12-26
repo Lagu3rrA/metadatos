@@ -1,0 +1,107 @@
+[
+"CSS_bower.json", 
+    {
+        "name": "alarm", 
+        "version": "1.0.0", 
+        "authors": [{"name": "Andrew Accuardi ", "email": "andrewaccuardi@gmail.com"}], 
+        "license": "ISC", 
+        "description": "Alarm clock project during week1 day2 JS at Epicodus.", 
+        "dev-dependencies": {"gulp": "^3.9.1", "gulp-util": "^3.0.8", "jshint": "^2.9.4", "vinyl-source-stream": "^1.1.0"}, 
+        "dependencies": {"jquery": "^3.1.1", "font-awesome": "^4.7.0", "materialize": "^0.97.8"}
+    }, 
+"PYTHON_setup.cfg", 
+    {
+        "name": "rustdesk", 
+        "version": "1.2.0", 
+        "authors": [{"name": "rustdesk ", "email": "info@rustdesk.com"}], 
+        "description": "A remote control software.", 
+        "dependecies": {"num_cpus": "1.13", "bytes": {"version": "1.2", "features": ["serde"]}, "default-net": "0.11.0", "wol-rs": "0.9.1"},
+        "dev-dependecies": {"hound": "3.5"}
+    }, 
+"PHP_composer.json", 
+    {
+        "name": "composer/composer", 
+        "homepage": "https://getcomposer.org/", 
+        "authors": [{"name": "Nils Adermann", "email": "naderman@naderman.de"}, {"name": "Jordi Boggiano", "email": "j.boggiano@seld.be"}], 
+        "keywords": ["package", "dependency", "autoload"], 
+        "license": "MIT", 
+        "description": "Composer helps you declare, manage and install dependencies of PHP projects. It ensures you have the right stack everywhere.", 
+        "dependencies": {"php": "^7.2.5 || ^8.0", "composer/ca-bundle": "^1.0", "composer/class-map-generator": "^1.0"}, 
+        "dev-dependencies": {"symfony/phpunit-bridge": "^6.0", "phpstan/phpstan": "^1.9.3", "phpstan/phpstan-phpunit": "^1.0"}
+    }, 
+"R_DESCRIPTION.txt", 
+    {
+        "name": " Integrate R with RDocumentation", 
+        "version": " 0.8.3", 
+        "authors": [{"name": "Hannes Buseyne"}, {"name": "Filip Schouwenaars", "email": " filip@datacamp.com"}], 
+        "homepage": " https://www.rdocumentation.org", 
+        "url": " https://github.com/datacamp/RDocumentation", 
+        "description": " Wraps around the default help functionality in R. Instead of plain documentation files", 
+        "license": " GPL (>= 2)"
+    }, 
+"HASKELL_cabal", 
+    {
+        "name": " unused", 
+        "version": "0.10.0.0", 
+        "description": " A command line tool to identify unused code.", 
+        "url": " https://github.com/joshuaclayton/unused#readme", 
+        "license": "MIT", 
+        "authors": [{"name": " Josh Clayton", "email": " sayhi@joshuaclayton.me"}], 
+        "dependencies": {" base ": ">= 4.7 && < 5", "process": "", "containers": "", "filepath": "", "directory": ""}
+    },
+"RUBY_gemspec", 
+    {
+        "name": "gitmodel", 
+        "url": "http://github.com/pauldowman/gitmodel", 
+        "version": "0.0.8", 
+        "authors": [{"name": "Paul Dowman", "email": "paul@pauldowman.com"}], 
+        "dependencies": {" activemodel": " ~> 3.0.1", " activesupport": " ~> 3.0.1", " dalli": "", " grit": " >= 2.3.0"}, 
+        "dev-dependencies": {" ZenTest": " >= 4.4.0", " autotest": " >= 4.4.1", " rspec": " >= 2.0.1"}, 
+        "description": "<<-DESC.strip.gsub(/\\n\\s+/,)GitModel persists Ruby objects using Git as a data storage engine. Its an"
+    }, 
+"JAVA_pom.xml", 
+    {
+        "name": "Kubernetes Client API", 
+        "version": "18.0.0-SNAPSHOT", 
+        "homepage": "https://github.com/kubernetes-client/java", 
+        "description": "Kubernetes Client Library", 
+        "repository": "https://github.com/kubernetes-client/java", 
+        "license": "The Apache Software License, Version 2.0", 
+        "authors": [{"name": "The Kubernetes Authors", "email": "kubernetes-dev@googlegroups.com"}], 
+        "dependencies":  {"commons-lang3": "${apache.commons.lang3.version}", "commons-collections4": "${apache.commons.collections4.version}"}
+    }, 
+"JULIA_Project.toml", 
+    {
+        "name": "Graphs", 
+        "version": "0.10.3", 
+        "authors": {"name": "Harrison Grodin ", "email": "harrison.grodin@gmail.com"}, 
+        "dependencies": {"DataStructures": "\u2265 0.14", "julia": "0.7, 1"}, 
+        "keywords": ["Graphs"], 
+        "description": "Traditional graphing library for a variety of graph types."
+    }, 
+"PYTHON_setup.cfg", 
+    {   
+        "name": "pus", 
+        "url": "https://github.com/limix/pus", 
+        "version": "attr: version.get", 
+        "authors": [{"name": "Danilo Horta", "email": "horta@ebi.ac.uk"}], 
+        "dependencies": {"click": ">=6.7", "pur": ">=5.0.0", "pytest": ">=3.6.2"}, 
+        "keywords": ["function", " optimisation"], 
+        "license": "MIT", 
+        "description": "Update the required packages in setup.cfg file"
+    }, 
+"RUST_Cargo.toml", 
+    {
+        "name": "Flask-Classy", 
+        "url": "https://github.com/apiguy/flask-classy", 
+        "version": "0.6.8",
+        "authors": [{"name": "Freedom Dumlao", "email": "freedomdumlao@gmail.com"}], 
+        "dependencies": {"six": ">=1.11.0", "numpy": "", "pandas": "", "cherrypy": "", "jinja2": "", "matplotlib": ""}, 
+        "license": "BSD", 
+        "description": "Class based views for Flask,"
+    }
+]
+
+
+
+

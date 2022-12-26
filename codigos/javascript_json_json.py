@@ -2,10 +2,9 @@
 """
 Created on Wed Nov 16 22:37:21 2022
 
-@author: jacan
+@author: Lagu3rrA
 """
 
-import os
 import json
 
 
@@ -44,18 +43,7 @@ class javascript_json_json:
         
         return listaDeAutores
 
-    def casoDependecias(jsono):
-        mapaDeDependecias = {}
-        
-        if 'devDependencies' in jsono:
-            for key, value in jsono['devDependencies'].items():
-                mapaDeDependecias[key] = value
-            
-        if 'dependencies' in jsono:
-            for key, value in jsono['dependencies'].items():
-                mapaDeDependecias[key] = value
- 
-        return mapaDeDependecias
+
     # Relleno el diccionario con la informacion de json que nos han dado
     def rellenar_el_diccionario(jsono):
         
@@ -66,45 +54,37 @@ class javascript_json_json:
         # en nuestro diccionario
         
      
-        if 'name' in jsono: 
+        if 'name' in jsono and jsono['name']: 
             datos['name'] = jsono['name']
             
-        if 'homepage' in jsono: 
+        if 'homepage' in jsono and jsono['homepage']: 
             datos['homepage'] = jsono['homepage'] 
-            
-        if 'version' in jsono: 
-            datos['version'] = jsono['version'] 
         
-        if 'author' in jsono: 
-            datos['authors'] = javascript_json_json.casoAutores(jsono)      
-        
-        if 'keywords' in jsono: 
-            datos['keywords'] = jsono['keywords']
-            
-        if 'license' in jsono: 
-            datos['license'] = jsono['license']
-            
-        if 'description' in jsono: 
-            datos['description'] = jsono['description']   
-        
-        if 'repository' in jsono: 
+        if 'repository' in jsono and jsono['repository']['url']: 
             datos['url'] = jsono['repository']['url'].replace("git+","")
             
-        if 'devDependencies' in jsono or 'dependencies' in jsono :
-            datos['dependecies'] = javascript_json_json.casoDependecias(jsono)
+        if 'version' in jsono and jsono['version']: 
+            datos['version'] = jsono['version'] 
+        
+        if 'author' in jsono and jsono['author']: 
+            datos['authors'] = javascript_json_json.casoAutores(jsono)
+        
+        if 'dependencies' in jsono and jsono['dependencies']:
+            datos['dependencies'] = jsono['dependencies']
+            
+        if 'devDependencies' in jsono and jsono['devDependencies']:
+            datos['dev-dependencies'] = jsono['devDependencies']
+        
+        if 'keywords' in jsono and jsono['keywords']: 
+            datos['keywords'] = jsono['keywords']
+            
+        if 'license' in jsono and jsono['license']: 
+            datos['license'] = jsono['license']
+            
+        if 'description' in jsono and jsono['description']: 
+            datos['description'] = jsono['description']   
+        
 
-            
-    # Vuelco los datos del diccionario en un archivo json 
-    def crear_el_nuevo_json():
-    
-            
-            dir = r"."
-            file_name =  "javascript_metadatos.json"
-            
-            with open(os.path.join(dir, file_name), 'w') as file:
-                json.dump(datos, file) 
-                
-                
     def liderDelTrabajo():#ruta
         
         # Sacamos la informacion del json
@@ -112,6 +92,5 @@ class javascript_json_json:
         
         # La guardamos en el diccionario
         javascript_json_json.rellenar_el_diccionario(jsono)
-        
-        # Creamos el archivo que vamos a devolver
-        javascript_json_json.crear_el_nuevo_json()
+
+        return datos

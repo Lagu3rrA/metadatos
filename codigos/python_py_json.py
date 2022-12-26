@@ -5,8 +5,6 @@ Created on Wed Nov 16 22:37:21 2022
 @author: jacan
 """
 
-import json
-import os
 
 datos = {}
 
@@ -123,8 +121,39 @@ class python_py_json:
         
         # Quitamos el ultimo espacio porque no contiene nada
         listaDeDependecias.pop(len(listaDeDependecias)-1)
+        
+        # Las metemos en el mapa que depues devolveremos 
+        mapaDeDependecias = {}
+        
+        for dependencia in listaDeDependecias:
+            valor = ""
+            entro = False # Esto lo uso por si no hay mayor o menor solo la dependencias
+            
+            if dependencia.find('>') > -1: 
+                entro = True
+                keyValue = dependencia.split(">", 1)
+                if len(keyValue) > 1:
+                    valor = '>' + keyValue[1]
+                
+            elif dependencia.find('<') > -1: 
+                entro = True
+                keyValue = dependencia.split("<", 1)
+                if len(keyValue) > 1:
+                    valor = '<' + keyValue[1]
 
-        return listaDeDependecias
+            elif dependencia.find('=') > -1:
+                entro = True
+                keyValue = dependencia.split("=", 1)
+                if len(keyValue) > 1:
+                    valor = '=' + keyValue[1]
+            if entro:
+                clave = keyValue[0]
+            else:
+                clave = dependencia
+                
+            mapaDeDependecias[clave] = valor
+        
+        return mapaDeDependecias
     
     # Relleno el diccionario con la informacion de json que nos han dado
     
@@ -141,45 +170,31 @@ class python_py_json:
         
         
         
-        if 'name' in mapaDeLosAtributos:
+        if 'name' in mapaDeLosAtributos and mapaDeLosAtributos['name']:
             datos['name'] = mapaDeLosAtributos['name'].replace(",", "")
+            
+        if 'url' in mapaDeLosAtributos and mapaDeLosAtributos['url']:
+            datos['url'] = mapaDeLosAtributos['url'].replace(",", "")
 
-        if 'version' in mapaDeLosAtributos:
+        if 'version' in mapaDeLosAtributos and mapaDeLosAtributos['version']:
             datos['version'] = mapaDeLosAtributos['version'].replace(",", "")
         
-        if 'author' in mapaDeLosAtributos:
+        if 'author' in mapaDeLosAtributos and mapaDeLosAtributos['author']:
             datos['authors'] = python_py_json.casoAutores(mapaDeLosAtributos)
             
-        if 'url' in mapaDeLosAtributos:
-            datos['repository'] = mapaDeLosAtributos['url'].replace(",", "")
+        if 'install_requires' in mapaDeLosAtributos and mapaDeLosAtributos['install_requires']:
+            datos['dependencies'] = python_py_json.casoDependencias(mapaDeLosAtributos['install_requires'])
            
-        if 'license' in mapaDeLosAtributos:
+        if 'license' in mapaDeLosAtributos and mapaDeLosAtributos['license']:
             datos['license'] = mapaDeLosAtributos['license'].replace(",", "")
         
-        if 'description' in mapaDeLosAtributos:
+        if 'description' in mapaDeLosAtributos and mapaDeLosAtributos['description']:
             datos['description'] = mapaDeLosAtributos['description']
            
-
-        if 'install_requires' in mapaDeLosAtributos:
-            datos['dependencies'] = python_py_json.casoDependencias(mapaDeLosAtributos['install_requires'])
-
-        
-    # Vuelco los datos del diccionario en un archivo json
-    
-    def crear_el_nuevo_json():
-            
-            dir = r"."
-            file_name =  "python_metadatos.json"
-            
-            with open(os.path.join(dir, file_name), 'w') as file:
-                json.dump(datos, file)
-            
-        
-               
     
     def liderDelTrabajo():
         
         py = python_py_json.cargar_el_py('./setup.py')
         python_py_json.rellenar_el_diccionario(py)
         
-        python_py_json.crear_el_nuevo_json()
+        return datos 

@@ -2,11 +2,8 @@
 """
 Created on Mon Oct 17 23:36:35 2022
 
-@author: jacan
+@author: Lagu3rrA
 """
-
-import os
-import json
 
 
 datos = {}
@@ -75,7 +72,6 @@ class R_txt_json:
             
             # Y el email
             email = R_txt_json.encontrar_email(autorConFormato)
-            print(email)
             if email:
                 autor['email'] = R_txt_json.encontrar_email(autorConFormato)
             
@@ -115,52 +111,14 @@ class R_txt_json:
         return nombreAutor
         
     def encontrar_email(autorConFormato):
-    
+        
         # Iteramos sobre los  datos que tenemos del autor que nos pasan
         # y si encontramos algun elemento con la @ significa que es el mail
         for valor in autorConFormato:
             if valor.find("@") > 0:
                 return valor
-              
-        
-    # Relleno el diccionario con la informacion de json que nos han dado
-    def rellenar_el_diccionario(txtFormato):
-        
-        # Tenemos una copia para los casos que hay que recorer el caso entero
-        txtFormatoSave = txtFormato
-        
-        # recorriendo el txt iterando sobre cada linea
-        for palabra in txtFormato:
             
-            # Como tiene un formato parecido a clave valor lo separamos por : y guardamos la key y el value
-            dividido = palabra.split(': ',3)
-            key = dividido[0]
-            if(len(dividido) > 1):
-                value = dividido[1]
-            
-            # Vamos rellenado  el diccionario con los datos 
-            
-            if key == 'Title':
-                datos['name'] = value
-                
-            if key == 'Version':
-                datos['version'] = value
-                
-            if key == 'URL':
-                datos['homepage'] = value
-                
-            if key == 'BugReports': # usamos el de los issues pero le quitamso el directorio issues
-                datos['repository'] = R_txt_json.casoRepositor(value)
-                
-            if key == 'Description': # si la descripcion esta en mas de una linea esto resuelve ese problema
-                datos['description'] = R_txt_json.casoDescripcion(txtFormatoSave)
-            
-            if key == 'License':
-                datos['license'] = value
-            
-            if key == 'Authors@R': # organiza el formato para que salga nombre y mail
-                datos['authors'] = R_txt_json.casoAutores(txtFormatoSave)
-        
+     
     def casoDescripcion(txtFormato):
         
         # Union en una lista de toda la descripcion
@@ -175,11 +133,11 @@ class R_txt_json:
             
             # Para salirnos y no meter lineas con espacios al principio de mas salimos cuando
             # la primera letra despues de haber entrado en el if de abajo es diferente al espacio
-            if estamosDentroDeDescripcion and not atributo[0][0] == ' ':
+            if estamosDentroDeDescripcion and not atributo[0] == ' ':
                 break
             
             # Buscamos que la primera letra sea D o espacio 
-            if (atributo[0][0] == 'D') or (atributo[0][0] == ' ' and estamosDentroDeDescripcion):
+            if (atributo[0] == 'D' and atributo[2] == 's') or (atributo[0] == ' ' and estamosDentroDeDescripcion):
                 estamosDentroDeDescripcion = True
                 
                 # Si lo es significa que estamos en los autores y lo añadimos a nuestra lista
@@ -193,7 +151,43 @@ class R_txt_json:
         dos.pop(0)
         
         return ''.join(dos)
+    
+    def casoDependencias(txtFormato):
+        mapaDeDependecias = {}
         
+        
+        estamosDentroDeImport = False
+        
+        # Con esto juntamos todo en una lista
+        for atributo  in txtFormato:
+            
+            # Para salirnos y no meter lineas con espacios al principio de mas salimos cuando
+            # la primera letra despues de haber entrado en el if de abajo es diferente al espacio
+            if estamosDentroDeImport and not atributo[0] == ' ':
+                break
+            
+            # Aqui estamos dentro del import
+            if (atributo[0] == 'I' and atributo[2] == 'p') or (atributo[0] == ' ' and estamosDentroDeImport):
+                
+                estamosDentroDeImport = True
+                # Hacemos este if para sacar al 'Import:' del mapa 
+                if atributo[0] == ' ':
+                    
+                    # despues limpiamos y lo  metemos con el formatro elegido 
+                    valor = ""
+                    clave = atributo
+                    
+                    if atributo.find('(') > -1: 
+                        
+                        keyValue = atributo.split("(", 1)
+                        valor = keyValue[1].replace(')','').replace(',','')
+                        clave = keyValue[0].replace(' ','')
+                    
+                    mapaDeDependecias[clave] = valor
+                
+        return mapaDeDependecias
+                
+                
     def casoRepositor(valor):
         
         # Lo separo por / y quito la ultima que es la que esta el issue
@@ -202,18 +196,49 @@ class R_txt_json:
         
         # lo vuelve a jutnar con / entre los huecos 
         return '/'.join(realRepositorio)
+              
         
-    # Vuelco los datos del diccionario en un archivo json
-    def crear_el_nuevo_json():
+    # Relleno el diccionario con la informacion de txt que nos han dado
+    def rellenar_el_diccionario(txtFormato):
+        
+        # Tenemos una copia para los casos que hay que recorer el caso entero
+        txtFormatoSave = txtFormato
+        
+        # recorriendo el txt iterando sobre cada linea
+        for palabra in txtFormato:
+            # Como tiene un formato parecido a clave valor lo separamos por : y guardamos la key y el value
+            dividido = palabra.split(':',1)
+            key = dividido[0]
+            if(len(dividido) > 1):
+                value = dividido[1]
             
-            dir = r"."
-            file_name =  "R_metadatos.json"
+            # Vamos rellenado  el diccionario con los datos 
+            if key == 'Title' and value:
+                datos['name'] = value
+                
+            if key == 'URL' and value:
+                datos['homepage'] = value
+                
+            if key == 'BugReports' and value: # usamos el de los issues pero le quitamso el directorio issues
+                datos['url'] = R_txt_json.casoRepositor(value)
+                
+            if key == 'Version' and value:
+                datos['version'] = value
+                
+            if key == 'Authors@R' and value: # organiza el formato para que salga nombre y mail
+                datos['authors'] = R_txt_json.casoAutores(txtFormatoSave)
+                
+            if key == 'Imports' and value:
+                datos['dependencies'] = R_txt_json.casoDependencias(txtFormatoSave)
+                       
+            if key == 'License' and value:
+                datos['license'] = value   
+                
+            if key == 'Description' and value: # si la descripcion esta en mas de una linea esto resuelve ese problema
+                datos['description'] = R_txt_json.casoDescripcion(txtFormatoSave)
             
-            with open(os.path.join(dir, file_name), 'w') as file:
-                json.dump(datos, file)
             
         
-               
     def liderDelTrabajo():
             txt = R_txt_json.cargar_el_txt("./DESCRIPTION.txt")
                 
@@ -221,7 +246,7 @@ class R_txt_json:
                 
             R_txt_json.rellenar_el_diccionario(a)
             
-            R_txt_json.crear_el_nuevo_json()
+            return datos
             
     
 

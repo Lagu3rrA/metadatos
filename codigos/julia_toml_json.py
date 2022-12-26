@@ -2,11 +2,10 @@
 """
 Created on Wed Nov 16 22:37:21 2022
 
-@author: jacan
+@author: Lagu3rrA
 """
-import os
+
 import toml
-import json
 
 
 # Creo el diccionario en el que voy a meter la informacion
@@ -47,66 +46,34 @@ class julia_toml_json:
         # en nuestro diccionario
         
 
-        if 'name' in toml:
+        if 'name' in toml and toml['name']:
             datos['name'] = toml['name']
             
-        if 'version' in toml: 
+        if 'version' in toml and toml['version']: 
             datos['version'] = toml['version']
             
-        if 'authors' in toml: 
+        if 'authors' in toml and toml['authors']: 
             
-            #Cojo la lista de autores del json del toml
-            listaDeAutoresTOML = toml['authors']
-            
-            #creo la lista en la que metere todos los autores
-            listaDeAutoresJSON = []
-            
-            #guardamos la lista para meterla en el diccionario
-            listaDeAutoresJSON = julia_toml_json.crearListaAutores(listaDeAutoresTOML)
-            
-            datos['authors'] = listaDeAutoresJSON
-            
-        if 'license' in toml:
-            datos['license'] = toml['license']
+            # Metemos la lista en el diccionario
+            datos['authors'] = julia_toml_json.crearListaAutores(toml['authors'])
+
+        if 'compat' in toml and toml['compat']:
+            datos['dependencies'] = toml['compat'] 
      
-        if 'keywords' in toml:
+        if 'keywords' in toml and toml['keywords']:
            datos['keywords'] = toml['keywords']
-           
-        if 'repository' in toml:
-           datos['repository'] = toml['repository']
-            
-        if 'desc' in toml:
+       
+        if 'desc' in toml and toml['desc']:
            datos['description'] = toml['desc']
            
-        if 'documentation' in toml:
-           datos['homepage'] = toml['documentation']
-           
-           
-        if 'compat' in toml:
-            datos['dependecies'] = toml['compat']
-            
-            
-    
-    # Vuelco los datos del diccionario en un archivo json 
-    def crear_el_nuevo_json():
-
-        dir = r"."
-        file_name =  "julia_metadatos.json"
-        
-        with open(os.path.join(dir, file_name), 'w') as file:
-            json.dump(datos, file) 
                 
                 
     def liderDelTrabajo():
         
-        print('julia')
         # Sacamos la informacion del json
         toml = julia_toml_json.cargar_el_toml('./Project.toml')
-        
         
         # La guardamos en el diccionario
         julia_toml_json.rellenar_el_diccionario(toml)
         
-        
-        # Creamos el archivo que vamos a devolver
-        julia_toml_json.crear_el_nuevo_json()
+        return datos

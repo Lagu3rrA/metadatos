@@ -5,9 +5,6 @@ Created on Mon Oct 17 23:36:35 2022
 @author: jacan
 """
 
-import os
-import json
-
 
 datos = {}
 
@@ -55,7 +52,6 @@ class haskell_cabal_json:
             
             if 'author' in keyValueNombre and not salir:
                 autorUnido['name'] = keyValueNombre['author'].replace("  ","")
-                print(keyValueNombre['author'].replace("  ",""))
                 for otraPalabra in cabalSeparadoSave:
                     
                     keyValueEmail = haskell_cabal_json.dejarBonito(otraPalabra)
@@ -69,7 +65,61 @@ class haskell_cabal_json:
         return listaDeAutoresADevolver
                 
             
-              
+    def casoDependencias(cabalSeparadoSave):
+        
+        # donde las devolveremos 
+        mapaDeDependencias = {}
+        
+        
+        # Seguimos la misma linea que hemos realizado con los autores para juntar la descripcion en un script
+        estamosDentroDeDependencias = False
+        
+        # Con esto juntamos todo en un mapa de dependecias
+        for atributo  in cabalSeparadoSave:
+            
+            # Para salirnos y no meter lineas con espacios al principio de mas salimos cuando
+            # la primera letra despues de haber entrado en el if de abajo es diferente al espacio
+            if len(atributo) > 1  and estamosDentroDeDependencias and not atributo[3] == ' ':
+                break
+            
+            # Buscamos que la primera letra sea b o espacio 
+            if len(atributo) > 1  and ((atributo[2] == 'b' and atributo[4] == 'i') or (atributo[2] == ' ' and estamosDentroDeDependencias)):
+                estamosDentroDeDependencias = True
+                
+                # esto saca el buil-depends de la primera dependencia 
+                if atributo[2] == 'b':
+                    _s_ = atributo.split(":",1)
+                    atributo = _s_[1]
+                
+                valor = ""
+                entro = False # Esto lo uso por si no hay mayor o menor solo la dependencias
+                
+                # Con esto elif contamplamos los casos de mayoro menor de las dependencias 
+                if atributo.find('>') > -1: 
+                    entro = True
+                    keyValue = atributo.split(">", 1)
+                    if len(keyValue) > 1:
+                        valor = '>' + keyValue[1].replace('  ', "")
+                    
+                elif atributo.find('<') > -1: 
+                    entro = True
+                    keyValue = atributo.split("<", 1)
+                    if len(keyValue) > 1:
+                        valor = '<' + keyValue[1].replace('  ', "")
+
+                elif atributo.find('=') > -1:
+                    entro = True
+                    keyValue = atributo.split("=", 1)
+                    if len(keyValue) > 1:
+                        valor = '=' + keyValue[1].replace('  ', "")
+                if entro:
+                    clave = keyValue[0].replace(',', "").replace('  ', "")
+                else:
+                    clave = atributo.replace(',', "").replace('  ', "")
+                    
+                mapaDeDependencias[clave] = valor
+                
+        return mapaDeDependencias             
         
     # Relleno el diccionario con la informacion de json que nos han dado
     def rellenar_el_diccionario(cabalSeparado):
@@ -83,40 +133,31 @@ class haskell_cabal_json:
             
             keyValue = haskell_cabal_json.dejarBonito(palabra)
             
-            if 'name' in keyValue:
+            entro = False
+            
+            if 'name' in keyValue and keyValue['name']:
                 datos['name'] = keyValue['name'].replace("  ","")
-            
-            if 'version' in keyValue:
+                
+            if 'homepage' in keyValue and keyValue['homepage']:
+                datos['url'] = keyValue['homepage'].replace("  ","") 
+                
+            if 'version' in keyValue and keyValue['version']:
                 datos['version'] = keyValue['version'].replace("  ","")
-                
-            if 'homepage' in keyValue:
-                datos['homepage'] = keyValue['homepage'].replace("  ","")
             
-            if 'license' in keyValue:
-                datos['license'] =  keyValue['license'].replace("  ","")
-            
-            if 'author' in keyValue:
+            if 'author' in keyValue and keyValue['author']:
                 datos['authors'] = haskell_cabal_json.casoAutores(cabalSeparadoSave)
-                
-            if 'synopsis' in keyValue:
+
+            if not entro and '  build-depends' in keyValue and keyValue['  build-depends']:
+                datos['dependencies'] = haskell_cabal_json.casoDependencias(cabalSeparadoSave) 
+                entro = True # entraba varias ces y con esto solo entra 1
+            
+            if 'license' in keyValue and keyValue['license']:
+                datos['license'] =  keyValue['license'].replace("  ","")
+             
+            if 'synopsis' in keyValue and keyValue['synopsis']:
                 datos['description'] =  keyValue['synopsis'].replace("  ","")
             
 
-        
-        
-        
-   
-        
-    # Vuelco los datos del diccionario en un archivo json
-    def crear_el_nuevo_json():
-            
-        dir = r"."
-        file_name =  "haskell_metadatos.json"
-        
-        with open(os.path.join(dir, file_name), 'w') as file:
-            json.dump(datos, file)
-            
-        
                
     def liderDelTrabajo(f):
                    
@@ -128,8 +169,7 @@ class haskell_cabal_json:
             
         haskell_cabal_json.rellenar_el_diccionario(a)
         
-        haskell_cabal_json.crear_el_nuevo_json()
-            
+        return datos
     
 
     

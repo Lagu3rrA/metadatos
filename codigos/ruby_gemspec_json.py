@@ -5,10 +5,6 @@ Created on Mon Oct 17 23:36:35 2022
 @author: jacan
 """
 
-import os
-import json
-
-
 datos = {}
 
 class ruby_gemspec_json:
@@ -106,29 +102,45 @@ class ruby_gemspec_json:
         return mapaDeLosAtributos
         
     def casoAutores(mapaDeLosAtributos):
-        
-        listaDeAutores = []
         autor = {}
         
-        if 'author' in mapaDeLosAtributos:
-            autor['name']  = mapaDeLosAtributos['author']
+        if 'authors' in mapaDeLosAtributos:
+            autor['name']  = mapaDeLosAtributos['authors'].replace("'", "")
         
         if 'email' in mapaDeLosAtributos:
-            autor['email'] = mapaDeLosAtributos['email']
+            autor['email'] = mapaDeLosAtributos['email'].replace("'", "")
         
-        return listaDeAutores.append(autor)
+        listaDeAutores = [autor]
+        
+        return listaDeAutores
     
-    def casoDependencias(mapaDeLosAtributos,listaDeDependecias):
+    def casoDependencias(mapaDeLosAtributos):
+        
+        mapaDeDevDependencias = {}
+        mapaDeDependencias = {}
         # Recorro el mapita buscando dependecias
         for dependecias, dps in mapaDeLosAtributos.items():
-            
             # Al encontrarlas las pongo bonitas y las meto en la lista
-            if dps.find("dependency") > -1:
-                valorDeLaDependeciaBonito = dps.replace("add_","").replace('development_',"").replace("dependency","").replace("'","").replace(",","")
-                listaDeDependecias.append(valorDeLaDependeciaBonito)
+            if dps.find('dependency') > -1:
+                valorDeLaDependeciaBonito = dps.replace("add_","").replace("dependency","").replace("'","")
+                keyValue = valorDeLaDependeciaBonito.split(",",1)
                 
-        return listaDeDependecias
+                if dps.find('development_') > -1:
+                    if len(keyValue) > 1:
+                        mapaDeDevDependencias[keyValue[0].replace('development_',"")] = keyValue[1]
+                    else:
+                        mapaDeDevDependencias[keyValue[0].replace('development_',"")] = ""
+                    continue
+                    
+                if len(keyValue) > 1:
+                    mapaDeDependencias[keyValue[0]] = keyValue[1]
+                else:
+                    mapaDeDependencias[keyValue[0]] = ""
+                    
+        return (mapaDeDependencias,mapaDeDevDependencias)
+                                    
     
+
     # Relleno el diccionario con la informacion de json que nos han dado
     
     def rellenar_el_diccionario(gemspecFormato):
@@ -139,43 +151,31 @@ class ruby_gemspec_json:
         # ordeno todos los demas datos en un mapa
         mapaDeLosAtributos = ruby_gemspec_json.ordenarElMapa(atributo,gemspecFormato)
         
-        if 'name' in mapaDeLosAtributos:
-            datos['name'] = mapaDeLosAtributos['name']
+        if 'name' in mapaDeLosAtributos and  mapaDeLosAtributos['name']:
+            datos['name'] = mapaDeLosAtributos['name'].replace("'", "")
+            
+        if 'homepage' in mapaDeLosAtributos and  mapaDeLosAtributos['homepage']:
+            datos['url'] = mapaDeLosAtributos['homepage'].replace("'", "")
 
-        if 'version' in mapaDeLosAtributos:
-            datos['version'] = mapaDeLosAtributos['version']
+        if 'version' in mapaDeLosAtributos and  mapaDeLosAtributos['version']:
+            datos['version'] = mapaDeLosAtributos['version'].replace("'", "")
         
-        if 'author' in mapaDeLosAtributos:
+        if 'authors' in mapaDeLosAtributos and  mapaDeLosAtributos['authors']:
+            
             datos['authors'] = ruby_gemspec_json.casoAutores(mapaDeLosAtributos)
         
-        if 'homepage' in mapaDeLosAtributos:
-            datos['repository'] = mapaDeLosAtributos['homepage']
+        if 'dependecia1' in mapaDeLosAtributos and  mapaDeLosAtributos['dependecia1']:
+            tuplaDeMapas = ruby_gemspec_json.casoDependencias(mapaDeLosAtributos)
+            datos['dependencies'] = tuplaDeMapas[0]
+            datos['dev-dependencies'] = tuplaDeMapas[1]
+            
+        if 'license' in mapaDeLosAtributos and  mapaDeLosAtributos['license']:
+            datos['license'] = mapaDeLosAtributos['license'].replace("'", "")
+        
+        if 'description' in mapaDeLosAtributos and  mapaDeLosAtributos['description']:
+            datos['description'] = mapaDeLosAtributos['description'].replace("'", "")
            
-        if 'license' in mapaDeLosAtributos:
-            datos['license'] = mapaDeLosAtributos['license']
-        
-        if 'description' in mapaDeLosAtributos:
-            datos['description'] = mapaDeLosAtributos['description']
-           
-        listaDeDependecias = []
-        if 'dependecia1' in mapaDeLosAtributos:
-            
-            datos['dependencies'] = ruby_gemspec_json.casoDependencias(mapaDeLosAtributos,listaDeDependecias)
-            
 
-
-        
-    # Vuelco los datos del diccionario en un archivo json
-    
-    def crear_el_nuevo_json():
-            
-            dir = r"."
-            file_name =  "ruby_metadatos.json"
-            
-            with open(os.path.join(dir, file_name), 'w') as file:
-                json.dump(datos, file)
-            
-        
                
     def liderDelTrabajo(f):
         
@@ -187,4 +187,4 @@ class ruby_gemspec_json:
             
         ruby_gemspec_json.rellenar_el_diccionario(a)
         
-        ruby_gemspec_json.crear_el_nuevo_json()
+        return datos

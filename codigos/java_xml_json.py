@@ -2,7 +2,7 @@
 """
 Created on Tue Oct 18 00:32:38 2022
 
-@author: jacan
+@author: Lagu3rrA
 """
 
 # -*- coding: utf-8 -*-
@@ -24,10 +24,13 @@ class java_xml_json:
     def rellenar_el_diccionario(xmlo):
         for atributos in xmlo:
             
-            if atributos.tag.endswith('name'):
+          
+            if atributos.tag.endswith('name') and atributos.text:
+                datos['name'] = atributos.text
+            elif atributos.tag.endswith('artifactId') and atributos.text: # Si no existe nombre como tal de damos el del artifactId
                 datos['name'] = atributos.text
             
-            if atributos.tag.endswith('url'):
+            if atributos.tag.endswith('url') and atributos.text:
                 datos['homepage'] = atributos.text
                 
             if atributos.tag.endswith('scm'):
@@ -35,10 +38,10 @@ class java_xml_json:
                 for scm in atributos:
                     # Vuelvo a iterar sobre el para llegar al url 
                     # del repositorio que es lo que me interesa
-                    if scm.tag.endswith('url'):
+                    if scm.tag.endswith('url') and scm.text:
                         datos['repository'] = scm.text
             
-            if atributos.tag.endswith('version'):
+            if atributos.tag.endswith('version')and atributos.text:
                 datos['version'] = atributos.text 
             
                 
@@ -55,10 +58,10 @@ class java_xml_json:
                     
                     for __a__ in autores:
                         # para cada uno vemos si tiene los atributos de nombre y de email
-                        if __a__.tag.endswith('name'):
+                        if __a__.tag.endswith('name') and __a__.text:
                             autor['name'] = __a__.text
                          
-                        if __a__.tag.endswith('email'):
+                        if __a__.tag.endswith('email') and __a__.text:
                             autor['email'] = __a__.text
                     
                     # cuando acabamos de iterar los atributos 
@@ -68,8 +71,11 @@ class java_xml_json:
                 
             if atributos.tag.endswith('dependencyManagement'):
                 
-                # Creo un lisa en la que voy  a meter todas las dependecias
-                dependecias = []
+                # Creo un mapa en la que voy  a meter todas las dependecias
+                mapaDeDependecias = {}
+                
+                nombre = ''
+                version = ''
               
                 # itero sobre dependencyManagement 
                 for dependeciasVarias in atributos:
@@ -77,60 +83,54 @@ class java_xml_json:
                     #itero sobre dependencies 
                     for cadauna in dependeciasVarias:
                        
-                        # creo otro dicionario como tupla para que este el nombre y la version 
-                        # de la dependecia
-                        tupla = {}
-                       
                         # y por ultimo itero sobre la dependecia en si viendo sus componentes
                         for infor in cadauna:
-                           
+                            
                             # Saco su nombre y su version
-                            if infor.tag.endswith('artifactId'):
-                                tupla['name'] = infor.text
+                            if infor.tag.endswith('artifactId') and infor.text:
+                                nombre = infor.text
                         
-                            if infor.tag.endswith('version'):
-                                tupla['version'] = infor.text
-                               
-                            # Y la meto en la lista de dependecias
-                            dependecias.append(tupla)
-                           
+                            if infor.tag.endswith('version') and infor.text:
+                                version = infor.text
+                                
+                            
+                            
+                            # Y la meto en el mapa de dependecias
+                            mapaDeDependecias[nombre] = version
+                mapaDeDependecias.pop("")           
                 # una vez cnstruida la lista de dependecias la guardo en el diccionario grande de datos 
-                datos['dependencies'] = dependecias
+                datos['dependencies'] = mapaDeDependecias
               
             if atributos.tag.endswith('licenses'):
+                
                   listaDeLicencias = []
                   for licencias in atributos:
-                      tupla = {}
+                      #tupla = {}
                       for licencia in licencias:
-                          if licencia.tag.endswith('name'):
+                          if licencia.tag.endswith('name') and licencia.text:
+                              datos['license'] = licencia.text
+                              
+                          """
+                          if licencia.tag.endswith('name') and licencia.text:
                               tupla['name'] = licencia.text
                       
-                          if licencia.tag.endswith('url'):
+                          if licencia.tag.endswith('url') and licencia.text:
                               tupla['url'] = licencia.text
                         
                           listaDeLicencias.append(tupla)
-          
-            if atributos.tag.endswith('description'):
+                          """
+                          
+            if atributos.tag.endswith('description') and atributos.text:
                 datos['description'] = atributos.text 
                 
-    
-    def crear_el_nuevo_json():
-            
-            
-            dir = r"."
-            file_name = "java_metadatos.json"
-            
-            with open(os.path.join(dir, file_name), 'w') as file:
-                json.dump(datos, file)
-                
+
+
     def liderDelTrabajo():
            
-            print('java')
             xmlo = java_xml_json.cargar_el_xml('./pom.xml')
             
             java_xml_json.rellenar_el_diccionario(xmlo)
-                
-            java_xml_json.crear_el_nuevo_json()
+            return datos
                     
             
            
