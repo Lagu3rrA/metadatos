@@ -9,7 +9,9 @@ Como ejecutarlo
 ---------------
 
 Para poder ejecutarlo necesitas  copiar todos los archivos que hay  dentro de la carpeta códigos en tu proyecto y ejecutar
+
 `python master.py`
+
 Te preguntara como quieres que se llame el archivo y posteriormente se guardara en el mismo directorio que guardaste el master.
 
 
@@ -26,7 +28,7 @@ Organizacion de las carpetas
       Aquí encontramos todos los diferentes códigos y el master, que es desde el que se ejecutan todos.
   
   - `test`
-  -
+  
       Hay una carpeta archivos donde estan los archivos de ejemplo de los metadatos de lo lenguajes, los tenemos aqui para cuando se hagan los 
       test, se les llame desde aqui y esten todos juntos.
       Aparte encontramos todos los test correspondietes a las distintas clase que tenemos.
