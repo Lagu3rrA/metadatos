@@ -21,15 +21,6 @@ class css_json_json:
             curso = json.load(contenido)
             return curso
     
-    def casoDependecias(jsono, mapaDeDependecias):
-        
-        if 'devDependencies' in jsono:
-            for key, value in jsono['devDependencies'].items():
-                mapaDeDependecias[key] = value
-            
-        if 'dependencies' in jsono:
-            for key, value in jsono['dependencies'].items():
-                mapaDeDependecias[key] = value
  
     def casoAutores(listaCreadores):
         listaDeAutores = []
