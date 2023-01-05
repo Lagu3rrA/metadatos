@@ -73,7 +73,7 @@ class R_txt_json:
             # Y el email
             email = R_txt_json.encontrar_email(autorConFormato)
             if email:
-                autor['email'] = R_txt_json.encontrar_email(autorConFormato)
+                autor['email'] = email
             
             # Añadimos el autor a la lista
             listaAutoresDevolver.append(autor)
