@@ -7,71 +7,113 @@
 ,,,Lenguaje,archivo fuente,"Ejemplos
 (3 repo)",name,pagina web,repositorio,version,author email,author,dependecias,dev- dependecias,keywords,licencia,description
 ,,,Python,setup.cfg,"https://github.com/oeg-upm/soca/blob/main/setup.cfg
+
 https://github.com/embray/setup.cfg/blob/master/setup.cfg
+
 https://github.com/douglatornell/PyPkg-Expts/blob/master/setup.cfg
+
 https://github.com/horta/pus/blob/master/setup.cfg
 ",metadata - name,metadata - home-page,metadata - url ,metadata - version,metadata - author_email,metadata - author,options - install_requires,,metadata - keywords,metadata - license,metadata - description
-,,,Python,setup.py,"https://github.com/adamhajari/spyre/blob/master/setup.py
+,,,Python,setup.py,"https://github.com/adamhajari/spyre/blob/master/setup.py 
+
 https://github.com/basak/glacier-cli/blob/master/setup.py
+
 https://github.com/myusuf3/octogit/blob/master/setup.py
-https://github.com/apiguy/flask-classy/blob/master/setup.py",setup - name,,setup - url,setup - version,setup - author_email,setup - author,setup - install_requires,,setup - keywords,"setup 
+
+https://github.com/apiguy/flask-classy/blob/master/setup.py
+",setup - name,,setup - url,setup - version,setup - author_email,setup - author,setup - install_requires,,setup - keywords,"setup 
 - license",setup - description
 ,,,Rust,"Cargo.toml
 ","https://github.com/rustdesk/rustdesk/blob/master/Cargo.toml
+
 https://github.com/dbeaver/dbeaver/blob/devel/pom.xml
+
 https://github.com/tensorflow/rust/blob/master/Cargo.toml
+
 https://github.com/rust-lang/rustlings/blob/main/Cargo.toml
 ",package - name,,package -  repository,package - version,package - authors,package - authors,dependencies,dev-depencencies,package - keywords ,"package 
 - license",package - description
 ,,,Java,pom.xml,"https://github.com/kubernetes-client/java/blob/master/pom.xml
+
 https://github.com/dbeaver/dbeaver/blob/devel/pom.xml
+
 https://github.com/square/dagger/blob/master/pom.xml
+
 https://github.com/brianfrankcooper/YCSB/blob/master/pom.xml
 ",artifactID / name,url,scm - url,version,developers - developer - email,developers - developer - name,"dependencyManagment - 
 dependecies",,,license,description
 ,,for the client,CSS,bower.json,"https://github.com/accua/js-template/blob/master/bower.json
+
 https://github.com/lukehaas/css-loaders/blob/step2/bower.json
+
 https://github.com/olgasawicka/Blog-Page-Template/blob/master/bower.json
 ",,,,,authors  ,authors  ,depencencies,,keywords,,description
 ,,for the server,CSS,package.json,"https://github.com/accua/js-template/blob/master/package.json
+
 https://github.com/lukehaas/css-loaders/blob/step2/package.json
+
 https://github.com/olgasawicka/Blog-Page-Template/blob/master/package.json
+
 https://github.com/kazzkiq/balloon.css/blob/master/package.json
+
 https://github.com/olton/Metro-UI-CSS/blob/master/package.json
 ",name,homepage,repository - url,version ,,,,devDepencencies,,license,
 ,,,php,composer.json,"https://github.com/composer/composer/blob/main/composer.json
+
 https://github.com/symfony/symfony/blob/6.2/composer.json
+
 https://github.com/PHPMailer/PHPMailer/blob/master/composer.json
+
 https://github.com/weprovide/valet-plus/blob/2.x/composer.json
+
 https://github.com/shopware/platform/blob/trunk/composer.json
 ",name,homepage,,,authors - email,authors - name,require,require-dev,keywords,license,description
 ,,,R,DESCRIPTION.txt,"https://github.com/Bart6114/jug/blob/bcc6b7e5b6891a0064b81b4dec394163d4dfcdca/DESCRIPTION
+
 https://github.com/edwindj/chunked/blob/master/DESCRIPTION
+
 https://github.com/rich-iannone/stationaRy/blob/main/DESCRIPTION
+
 https://github.com/datacamp/RDocumentation/blob/master/DESCRIPTION
+
 https://github.com/zachmayer/caretEnsemble/blob/master/DESCRIPTION
 ",Title,URL  ,BugReports (menos issues),Version ,Authors@R - person(  ,Authors@R - person(  ,Imports,,,License,Description
  ,,,javascript,package.json,"https://github.com/davidjbradshaw/iframe-resizer/blob/master/package.json
+
 https://github.com/vincepare/iframeTracker-jquery/blob/master/package.json
+
 https://github.com/adsbypasser/adsbypasser/blob/master/package.json
-https://github.com/LonelyCpp/react-native-youtube-iframe/blob/master/package.json",name,homepage,repository - url,version ,author ,author,,devDepencencies,keywords,license,description
+
+https://github.com/LonelyCpp/react-native-youtube-iframe/blob/master/package.json
+",name,homepage,repository - url,version ,author ,author,,devDepencencies,keywords,license,description
 ,,,julia,Project.toml,"https://github.com/JuliaGPU/CUDAdrv.jl/blob/master/Project.toml
+
 https://github.com/JuliaStochOpt/StochDynamicProgramming.jl/blob/master/Project.toml
+
 https://github.com/HarrisonGrodin/Simplify.jl/blob/master/Project.toml
+
 https://github.com/JunoLab/Juno.jl/blob/master/Project.toml
-https://github.com/JuliaAttic/OldGraphs.jl/blob/master/Project.toml",name,,,version ,authors,authors,"deps y compat
+
+https://github.com/JuliaAttic/OldGraphs.jl/blob/master/Project.toml
+",name,,,version ,authors,authors,"deps y compat
 (Manifest.toml for more)",,keywords,,desc
 ,,,Haskell,"""nombre"".cabal.","https://github.com/joshuaclayton/unused/blob/master/unused.cabal
+
 https://github.com/aviaviavi/legion/blob/master/legion.cabal
+
 https://github.com/mikeizbicki/HerbiePlugin/blob/master/HerbiePlugin.cabal
+
 https://github.com/RaphaelJ/friday/blob/master/friday.cabal
 ",name,,homepage,version,author,author / maintainer,library - build-depends,,,license,synopsis
 ,,,Ruby,"""nombre"".gemspec","https://github.com/Nerian/bootstrap-datepicker-rails/blob/master/bootstrap-datepicker-rails.gemspec
+
 https://github.com/riak-ripple/ripple/blob/master/ripple.gemspec
+
 https://github.com/mbleigh/subdomain-fu/blob/master/subdomain-fu.gemspec
+
 https://github.com/pauldowman/gitmodel/blob/master/gitmodel.gemspec
+
 https://github.com/tenderlove/the_metal/blob/master/the_metal.gemspec
- 
 ",Gem::Specification.new - gem.name,,Gem::Specification. new - gem.homepage,"Gem::Specifica
 tion. new - 
 gem.version","Gem::Specification
