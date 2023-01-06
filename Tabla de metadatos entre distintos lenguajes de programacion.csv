@@ -1,0 +1,82 @@
+,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+,,,,,, ,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+,,,Lenguaje,archivo fuente,"Ejemplos
+(3 repo)",name,pagina web,repositorio,version,author email,author,dependecias,dev- dependecias,keywords,licencia,description
+,,,Python,setup.cfg,"1
+2
+3
+4",metadata - name,metadata - home-page,metadata - url ,metadata - version,metadata - author_email,metadata - author,options - install_requires,,metadata - keywords,metadata - license,metadata - description
+,,,Python,setup.py,"1
+2
+3
+4",setup - name,,setup - url,setup - version,setup - author_email,setup - author,setup - install_requires,,setup - keywords,"setup 
+- license",setup - description
+,,,Rust,"Cargo.toml
+","1
+2
+3
+4",package - name,,package -  repository,package - version,package - authors,package - authors,dependencies,dev-depencencies,package - keywords ,"package 
+- license",package - description
+,,,Java,pom.xml,"1
+2 
+3
+4",artifactID / name,url,scm - url,version,developers - developer - email,developers - developer - name,"dependencyManagment - 
+dependecies",,,license,description
+,,for the client,CSS,bower.json,"1
+2
+3",,,,,authors  ,authors  ,depencencies,,keywords,,description
+,,for the server,CSS,package.json,"11
+22
+33
+4
+5",name,homepage,repository - url,version ,,,,devDepencencies,,license,
+,,,php,composer.json,"1
+2
+3
+4
+5",name,homepage,,,authors - email,authors - name,require,require-dev,keywords,license,description
+,,,R,DESCRIPTION.txt,"1
+2
+3
+4
+5",Title,URL  ,BugReports (menos issues),Version ,Authors@R - person(  ,Authors@R - person(  ,Imports,,,License,Description
+ ,,,javascript,package.json,"1
+2
+3
+4",name,homepage,repository - url,version ,author ,author,,devDepencencies,keywords,license,description
+,,,julia,Project.toml,"1
+2
+3
+4
+5",name,,,version ,authors,authors,"deps y compat
+(Manifest.toml for more)",,keywords,,desc
+,,,Haskell,"""nombre"".cabal.","1
+2
+3
+4",name,,homepage,version,author,author / maintainer,library - build-depends,,,license,synopsis
+,,,Ruby,"""nombre"".gemspec","1
+2
+3
+4
+5",Gem::Specification.new - gem.name,,Gem::Specification. new - gem.homepage,"Gem::Specifica
+tion. new - 
+gem.version","Gem::Specification
+new -
+gem. email","Gem::Specification
+new -
+ gem.authors
+","Gem::Specification. new - 
+gem.add_dependency
+","Gem::Specificat
+ion. new  - 
+gem.add_deve
+lopment_depe
+ndency",,"Gem::Specification. 
+new -
+ gem.license","Gem::Specifica
+tion. new -
+ gem.summary"
